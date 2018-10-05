@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Grid, Header } from 'semantic-ui-react'
+import ChatWindow from './ChatWindow.js'
 
 class AppContainer extends Component {
 
@@ -10,10 +11,14 @@ class AppContainer extends Component {
         <Grid columns={2} celled>
           <Grid.Row>
             <Grid.Column>
-              <div className="left-chat">ChatWindow A</div>
+              <div className="left-chat">
+                <ChatWindow />
+              </div>
             </Grid.Column>
             <Grid.Column>
-              <div className="right-chat">ChatWindow B</div>
+              <div className="right-chat">
+                <ChatWindow />
+              </div>
             </Grid.Column>
         </Grid.Row>
         </Grid>
