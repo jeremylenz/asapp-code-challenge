@@ -34,7 +34,7 @@ const initialMessages = [
 ]
 
 var getNextId = function () {
-  let id = 1 // Rob's id
+  let id = 1
   return function () {
     id += 1
     return id;
@@ -95,15 +95,15 @@ class AppContainer extends Component {
         <Grid columns={2} celled>
           <Grid.Row>
             <Grid.Column>
-              <div className="left-chat">
-                <ChatHistory owner='Rob' sendsTo='Laura' messages={this.state.messages} typingAsOf={lauraTypingAsOf} refreshTypingIndicator={this.state.refreshTypingIndicator} />
-                <MessageInput owner='Rob' sendsTo='Laura' sendMessage={this.sendMessage} updateTypingIndicator={this.updateTypingIndicator} />
+              <div className="chat-window">
+                <ChatHistory owner='Laura' sendsTo='Rob' messages={this.state.messages} typingAsOf={robTypingAsOf} refreshTypingIndicator={this.state.refreshTypingIndicator} />
+                <MessageInput owner='Laura' foo='bar' sendsTo='Rob' sendMessage={this.sendMessage} updateTypingIndicator={this.updateTypingIndicator} />
               </div>
             </Grid.Column>
             <Grid.Column>
-              <div className="right-chat">
-                <ChatHistory owner='Laura' sendsTo='Rob' messages={this.state.messages} typingAsOf={robTypingAsOf} refreshTypingIndicator={this.state.refreshTypingIndicator} />
-                <MessageInput owner='Laura' foo='bar' sendsTo='Rob' sendMessage={this.sendMessage} updateTypingIndicator={this.updateTypingIndicator} />
+              <div className="chat-window">
+                <ChatHistory owner='Rob' sendsTo='Laura' messages={this.state.messages} typingAsOf={lauraTypingAsOf} refreshTypingIndicator={this.state.refreshTypingIndicator} />
+                <MessageInput owner='Rob' sendsTo='Laura' sendMessage={this.sendMessage} updateTypingIndicator={this.updateTypingIndicator} />
               </div>
             </Grid.Column>
         </Grid.Row>

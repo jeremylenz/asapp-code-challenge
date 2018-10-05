@@ -37,7 +37,7 @@ class MessageInput extends Component {
 
     return (
       <div className='message-input'>
-        <Input action={sendButton} placeholder='' value={this.state.value} onChange={this.handleInput} onKeyUp={this.handleEnterKey} />
+        <Input action={sendButton} placeholder={`${this.props.owner} says...`} value={this.state.value} onChange={this.handleInput} onKeyUp={this.handleEnterKey} />
       </div>
     );
   }

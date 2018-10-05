@@ -13,16 +13,13 @@ code {
     monospace;
 }
 
-.left-chat {
-  height: 80vh;
-}
-
-.right-chat {
+.chat-window {
   height: 80vh;
 }
 
 .chat-history {
   height: 90%;
+  overflow: auto;
 }
 
 .message-input {
