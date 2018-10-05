@@ -82,13 +82,13 @@ class AppContainer extends Component {
             <Grid.Column>
               <div className="left-chat">
                 <ChatHistory owner='Rob' sendsTo='Laura' messages={this.state.messages} typingAsOf={lauraTypingAsOf} />
-                <MessageInput owner='Rob' sendsTo='Laura' />
+                <MessageInput owner='Rob' sendsTo='Laura' sendMessage={this.sendMessage} />
               </div>
             </Grid.Column>
             <Grid.Column>
               <div className="right-chat">
                 <ChatHistory owner='Laura' sendsTo='Rob' messages={this.state.messages} typingAsOf={robTypingAsOf} />
-                <MessageInput owner='Laura' foo='bar' sendsTo='Rob' fireMessage={this.sendMessage} />
+                <MessageInput owner='Laura' foo='bar' sendsTo='Rob' sendMessage={this.sendMessage} />
               </div>
             </Grid.Column>
         </Grid.Row>
