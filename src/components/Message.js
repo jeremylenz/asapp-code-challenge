@@ -1,9 +1,11 @@
 import React from 'react';
 import { Label } from 'semantic-ui-react'
 
-const Message = ({ whose, text, sentAt, messageId, from, to }) => {
+const Message = (props) => {
+  const { whose, message } = props
   const msgPointing = whose === 'ours' ? 'left' : 'right'
-  const msgColor = whose === 'ours' ? 'purple' : 'gray'
+  const msgColor = whose === 'ours' ? 'purple' : null
+  const text = props.message.text
 
   return (
     <div className={`boxy-message ${whose}`}>

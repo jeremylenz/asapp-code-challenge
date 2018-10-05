@@ -38,12 +38,17 @@ class AppContainer extends Component {
   constructor() {
     super()
     this.state = {
-      messages: [],
-      users: [],
+      messages: initialMessages,
+      users: initialUsers,
     }
   }
 
   render() {
+    const laura = this.state.users.find((user) => user.name === 'Laura')
+    const rob = this.state.users.find((user) => user.name === 'Rob')
+    const lauraTypingAsOf = laura.typingAsOf
+    const robTypingAsOf = rob.typingAsOf
+
     return (
       <Fragment>
         <Header as='h1'>Rob and Laura's BoxyChat</Header>
@@ -51,13 +56,13 @@ class AppContainer extends Component {
           <Grid.Row>
             <Grid.Column>
               <div className="left-chat">
-                <ChatHistory owner='Rob' />
+                <ChatHistory owner='Rob' messages={this.state.messages} typingAsOf={lauraTypingAsOf} />
                 <MessageInput owner='Rob' />
               </div>
             </Grid.Column>
             <Grid.Column>
               <div className="right-chat">
-                <ChatHistory owner='Laura' />
+                <ChatHistory owner='Laura' messages={this.state.messages} typingAsOf={robTypingAsOf} />
                 <MessageInput owner='Laura' />
               </div>
             </Grid.Column>
