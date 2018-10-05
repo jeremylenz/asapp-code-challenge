@@ -33,6 +33,14 @@ const initialMessages = [
   },
 ]
 
+var getNextId = function () {
+  let id = 2
+  return function () {
+    id += 1
+    return id;
+  }
+}();
+
 class AppContainer extends Component {
 
   constructor() {
@@ -41,6 +49,23 @@ class AppContainer extends Component {
       messages: initialMessages,
       users: initialUsers,
     }
+  }
+
+  sendMessage = (messageText, from, to) => {
+    console.log(messageText)
+    const newId = getNextId()
+    const newMessage = {
+      from: from,
+      to: to,
+      id: newId,
+      sentAt: Date.now(),
+      text: messageText,
+    }
+    this.setState((state, props) => {
+      return {
+        messages: [...state.messages, newMessage]
+      }
+    })
   }
 
   render() {
@@ -56,14 +81,14 @@ class AppContainer extends Component {
           <Grid.Row>
             <Grid.Column>
               <div className="left-chat">
-                <ChatHistory owner='Rob' messages={this.state.messages} typingAsOf={lauraTypingAsOf} />
-                <MessageInput owner='Rob' />
+                <ChatHistory owner='Rob' sendsTo='Laura' messages={this.state.messages} typingAsOf={lauraTypingAsOf} />
+                <MessageInput owner='Rob' sendsTo='Laura' />
               </div>
             </Grid.Column>
             <Grid.Column>
               <div className="right-chat">
-                <ChatHistory owner='Laura' messages={this.state.messages} typingAsOf={robTypingAsOf} />
-                <MessageInput owner='Laura' />
+                <ChatHistory owner='Laura' sendsTo='Rob' messages={this.state.messages} typingAsOf={robTypingAsOf} />
+                <MessageInput owner='Laura' foo='bar' sendsTo='Rob' fireMessage={this.sendMessage} />
               </div>
             </Grid.Column>
         </Grid.Row>
