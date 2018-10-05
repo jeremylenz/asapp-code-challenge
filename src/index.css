@@ -20,3 +20,30 @@ code {
 .right-chat {
   height: 80vh;
 }
+
+.chat-history {
+  height: 90%;
+}
+
+.message-input {
+  height: 10%;
+}
+
+.boxy-message {
+  padding: 5px;
+}
+
+.boxy-message.ours {
+  float: right;
+  clear: both;
+}
+
+.boxy-message.theirs {
+  float: left;
+  clear: both;
+}
+
+.typing-indicator {
+  float: left;
+  clear: both;
+}
