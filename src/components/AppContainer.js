@@ -34,7 +34,7 @@ const initialMessages = [
 ]
 
 var getNextId = function () {
-  let id = 2
+  let id = 1 // Rob's id
   return function () {
     id += 1
     return id;
@@ -48,22 +48,37 @@ class AppContainer extends Component {
     this.state = {
       messages: initialMessages,
       users: initialUsers,
+      refreshTypingIndicator: Date.now(),
     }
   }
 
   sendMessage = (messageText, from, to) => {
-    console.log(messageText)
+    const sentAt = Date.now()
     const newId = getNextId()
     const newMessage = {
       from: from,
       to: to,
       id: newId,
-      sentAt: Date.now(),
+      sentAt: sentAt,
       text: messageText,
     }
     this.setState((state, props) => {
       return {
         messages: [...state.messages, newMessage]
+      }
+    })
+  }
+
+  updateTypingIndicator = (owner, timestamp) => {
+    this.setState((state, props) => {
+      const user = state.users.find((user) => user.name === owner)
+      const updatedUser = Object.assign(user, {typingAsOf: timestamp})
+      const otherUsers = state.users.filter((user) => user.name !== owner)
+      setTimeout(() => {
+        this.setState({refreshTypingIndicator: Date.now()})
+      }, 3000)
+      return {
+        users: [...otherUsers, updatedUser]
       }
     })
   }
@@ -81,14 +96,14 @@ class AppContainer extends Component {
           <Grid.Row>
             <Grid.Column>
               <div className="left-chat">
-                <ChatHistory owner='Rob' sendsTo='Laura' messages={this.state.messages} typingAsOf={lauraTypingAsOf} />
-                <MessageInput owner='Rob' sendsTo='Laura' sendMessage={this.sendMessage} />
+                <ChatHistory owner='Rob' sendsTo='Laura' messages={this.state.messages} typingAsOf={lauraTypingAsOf} refreshTypingIndicator={this.state.refreshTypingIndicator} />
+                <MessageInput owner='Rob' sendsTo='Laura' sendMessage={this.sendMessage} updateTypingIndicator={this.updateTypingIndicator} />
               </div>
             </Grid.Column>
             <Grid.Column>
               <div className="right-chat">
-                <ChatHistory owner='Laura' sendsTo='Rob' messages={this.state.messages} typingAsOf={robTypingAsOf} />
-                <MessageInput owner='Laura' foo='bar' sendsTo='Rob' sendMessage={this.sendMessage} />
+                <ChatHistory owner='Laura' sendsTo='Rob' messages={this.state.messages} typingAsOf={robTypingAsOf} refreshTypingIndicator={this.state.refreshTypingIndicator} />
+                <MessageInput owner='Laura' foo='bar' sendsTo='Rob' sendMessage={this.sendMessage} updateTypingIndicator={this.updateTypingIndicator} />
               </div>
             </Grid.Column>
         </Grid.Row>

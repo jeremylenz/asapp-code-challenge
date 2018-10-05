@@ -14,6 +14,7 @@ class MessageInput extends Component {
     this.setState({
       value: e.target.value,
     })
+    this.props.updateTypingIndicator(this.props.owner, Date.now())
   }
 
   handleEnterKey = (e) => {

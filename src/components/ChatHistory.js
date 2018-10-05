@@ -5,9 +5,11 @@ import TypingIndicator from './TypingIndicator'
 class ChatHistory extends Component {
 
   render() {
+    const { messages, owner, refreshTypingIndicator } = this.props
+    const mostRecentMessage = messages[messages.length - 1].sentAt
     const typingAsOf = this.props.typingAsOf || 0
-    const displayTypingIndicator = ((Date.now() - typingAsOf) < 5000)
-    const { messages, owner } = this.props
+    // The typing indicator should show if the user pressed a key in the last 3 seconds, but suppressed if a message has been sent in the last 2 seconds
+    const displayTypingIndicator = (((Date.now() - typingAsOf) < 3000) && (Date.now() - mostRecentMessage) > 2000)
 
     return (
       <div className="chat-history">
