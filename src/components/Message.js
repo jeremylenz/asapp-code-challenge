@@ -5,7 +5,7 @@ const Message = (props) => {
   const { whose, message } = props
   const msgPointing = whose === 'ours' ? 'left' : 'right'
   const msgColor = whose === 'ours' ? 'purple' : null
-  const text = props.message.text
+  const text = message.text
 
   return (
     <div className={`boxy-message ${whose}`}>

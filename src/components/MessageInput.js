@@ -18,7 +18,7 @@ class MessageInput extends Component {
   }
 
   handleEnterKey = (e) => {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       this.sendMessage(this.state.value, this.props.owner, this.props.sendsTo)
     }
   }
