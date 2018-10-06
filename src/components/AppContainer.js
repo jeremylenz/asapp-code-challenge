@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Grid, Header } from 'semantic-ui-react'
+import { Grid, Header, Icon } from 'semantic-ui-react'
 import ChatHistory from './ChatHistory'
 import MessageInput from './MessageInput'
 
@@ -92,7 +92,14 @@ class AppContainer extends Component {
 
     return (
       <Fragment>
-        <Header as='h1'>Rob and Laura's BoxyChat</Header>
+        <div className='app-header'>
+          <Header as='h1' color='purple' textAlign='center'>
+            <Icon name='chat' />
+            <Header.Content>
+              Rob & Laura's BoxyChat
+            </Header.Content>
+          </Header>
+        </div>
         <Grid columns={2} celled>
           <Grid.Row>
             <Grid.Column>
