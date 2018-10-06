@@ -11,7 +11,7 @@ class ChatHistory extends Component {
   }
 
   scrollToBottom = () => {
-    scroller.scrollTo('lastMessage', {
+    scroll.scrollToBottom({
     duration: 200,
     delay: 0,
     smooth: true,
@@ -20,7 +20,8 @@ class ChatHistory extends Component {
   }
 
   componentDidUpdate = () => {
-
+    // console.log('scrollToBottom')
+    this.scrollToBottom()
   }
 
   render() {
@@ -28,14 +29,12 @@ class ChatHistory extends Component {
     const containerId = `${owner}-chat-history`
     const mostRecentMessage = messages[messages.length - 1].sentAt
     const typingAsOf = this.props.typingAsOf || 0
-    // The typing indicator should show if the user pressed a key in the last 3 seconds, but suppressed if a message has been sent in the last 2 seconds
+    // The typing indicator should show if the user pressed a key in the last 3 seconds, but suppressed if a message has been sent in the last 3 seconds
     const displayTypingIndicator = (((Date.now() - typingAsOf) < 3000) && (Date.now() - mostRecentMessage) > 3000)
 
-    console.log('scrollToBottom')
-    this.scrollToBottom()
-    
     return (
       <div className="chat-history" id={containerId}>
+        <p onClick={this.scrollToBottom}>Scroll</p>
         {messages.map((message) =>
         <Message
           key={message.id}
@@ -46,9 +45,6 @@ class ChatHistory extends Component {
         {displayTypingIndicator &&
           <TypingIndicator />
         }
-        <Element name="lastMessage">
-          <Message key={'hi'} message={{text: 'lastMessage'}} whose='ours' />
-        </Element>
       </div>
     );
   }
