@@ -105,7 +105,7 @@ class AppContainer extends Component {
             <Grid.Column>
               <div className="chat-window">
                 <ChatHistory owner='Laura' sendsTo='Rob' messages={this.state.messages} typingAsOf={robTypingAsOf} refreshTypingIndicator={this.state.refreshTypingIndicator} />
-                <MessageInput owner='Laura' foo='bar' sendsTo='Rob' sendMessage={this.sendMessage} updateTypingIndicator={this.updateTypingIndicator} />
+                <MessageInput owner='Laura' sendsTo='Rob' sendMessage={this.sendMessage} updateTypingIndicator={this.updateTypingIndicator} />
               </div>
             </Grid.Column>
             <Grid.Column>
