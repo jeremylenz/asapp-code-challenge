@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import Message from './Message'
 import TypingIndicator from './TypingIndicator'
-import * as Scroll from 'react-scroll';
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { animateScroll as scroll } from 'react-scroll'
 
 class ChatHistory extends Component {
-
-  constructor() {
-    super()
-  }
 
   componentDidUpdate = (prevProps) => {
     const prevMessageCount = prevProps.messages.length
@@ -52,7 +47,6 @@ class ChatHistory extends Component {
 
     return (
       <div className="chat-history" id={containerId}>
-        <p onClick={this.scrollToBottom}>Scroll</p>
         {messages.map((message) =>
         <Message
           key={message.id}
