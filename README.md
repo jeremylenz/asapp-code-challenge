@@ -17,3 +17,11 @@ yarn start
 ```
 
 The app will load at `http://localhost:3000`.
+
+#### Features
+
+* iMessage-style split-screen chat
+* Sent messages show in purple; received messages in grey
+* Typing indicator shows if a user has been typing in the last 3 seconds
+* Chat window automatically scrolls to bottom (uses `react-scroll` library)
+* Styling done with `semantic-ui-react` with custom CSS added
