@@ -62,6 +62,7 @@ class AppContainer extends Component {
       sentAt: sentAt,
       text: messageText,
     }
+    // In real life this is where the API call would go
     this.setState((state, props) => {
       return {
         messages: [...state.messages, newMessage]

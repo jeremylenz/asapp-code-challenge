@@ -10,27 +10,45 @@ class ChatHistory extends Component {
     super()
   }
 
+  componentDidUpdate = (prevProps) => {
+    const prevMessageCount = prevProps.messages.length
+    let newMessageCount = this.props.messages.length
+    if(this.shouldTypingIndicatorDisplay(Date.now())) {
+      newMessageCount++
+    }
+
+    if(newMessageCount > prevMessageCount) {
+      this.scrollToBottom()
+    }
+  }
+
+  shouldTypingIndicatorDisplay = (currentTime) => {
+    const { messages } = this.props
+    const typingAsOf = this.props.typingAsOf || 0
+    const lastKeystrokeAge = currentTime - typingAsOf
+
+    const mostRecentMessage = messages[messages.length - 1].sentAt
+    const mostRecentMessageAge = currentTime - mostRecentMessage
+
+    // The typing indicator should show if the user pressed a key in the last 3 seconds,
+    // but it should be suppressed if a message has been sent in the last 3 seconds.
+    return (lastKeystrokeAge < 3000 && mostRecentMessageAge > 3000)
+  }
+
   scrollToBottom = () => {
     scroll.scrollToBottom({
-    duration: 200,
+    duration: 500,
     delay: 0,
     smooth: true,
     containerId: `${this.props.owner}-chat-history`,
     })
   }
 
-  componentDidUpdate = () => {
-    // console.log('scrollToBottom')
-    this.scrollToBottom()
-  }
 
   render() {
     const { messages, owner } = this.props
     const containerId = `${owner}-chat-history`
-    const mostRecentMessage = messages[messages.length - 1].sentAt
-    const typingAsOf = this.props.typingAsOf || 0
-    // The typing indicator should show if the user pressed a key in the last 3 seconds, but suppressed if a message has been sent in the last 3 seconds
-    const displayTypingIndicator = (((Date.now() - typingAsOf) < 3000) && (Date.now() - mostRecentMessage) > 3000)
+    const displayTypingIndicator = this.shouldTypingIndicatorDisplay(Date.now())
 
     return (
       <div className="chat-history" id={containerId}>
